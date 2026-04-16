@@ -1,33 +1,32 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Activity,
-  Brain,
-  Shield,
+  Coins,
+  Moon,
+  Zap,
   Heart,
-  Bell,
-  Smartphone,
-  Monitor,
-  Clock,
-  MapPin,
-  Phone,
-  CheckCircle2,
   Users,
+  Megaphone,
+  ShoppingBag,
+  Database,
+  Shield,
+  Star,
+  Smartphone,
   Building2,
   Dumbbell,
   Home,
   HardHat,
-  Stethoscope,
-  Star,
+  CheckCircle2,
+  Gift,
+  TrendingUp,
+  Target,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { LinkButton } from "@/components/link-button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { LinkButton } from "@/components/link-button";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -38,72 +37,57 @@ const fadeUp = {
   }),
 };
 
-const tiers = [
-  {
-    name: "VITA Basic",
-    price: "19,900",
-    target: "개인 건강관리",
-    features: [
-      "VITA Score 일일 리포트",
-      "수면/스트레스 분석",
-      "AI 건강 코칭",
-      "KakaoTalk 알림",
-    ],
-    highlight: false,
-  },
-  {
-    name: "VITA Premium",
-    price: "29,900",
-    target: "가족 돌봄",
-    features: [
-      "Basic 전체 기능",
-      "보호자 실시간 모니터링",
-      "24시간 AI 관제",
-      "월 1회 차HC 원격 상담",
-      "이상 징후 자동 에스컬레이션",
-    ],
-    highlight: true,
-  },
-  {
-    name: "VITA Platinum",
-    price: "49,900",
-    target: "프리미엄 케어",
-    features: [
-      "Premium 전체 기능",
-      "가족 전원 알림",
-      "무제한 차HC 상담",
-      "분기별 건강검진 할인",
-      "응급 119 자동 연동",
-      "전담 케어 매니저",
-    ],
-    highlight: false,
-  },
+const earningTable = [
+  { action: "숙면 달성", metric: "목표 수면 시간 + 깊은수면 비율 달성", points: "500P/일", message: "밤새 충전" },
+  { action: "아침 준비도 상승", metric: "Readiness Score 전날 대비 +5점 이상", points: "300P/일", message: "회복 보상" },
+  { action: "스트레스 관리", metric: "HRV 목표치 3일 연속 유지", points: "300P/일", message: "마음 챙김" },
+  { action: "가족 안부 연결", metric: "가족 앱 연동 후 이모지 교환", points: "양측 200P", message: "효도 연결" },
+  { action: "팬덤 챌린지 참여", metric: "팬클럽 단체 건강 미션 주간 달성", points: "1,000P/주", message: "덕질 보상" },
+  { action: "약 복용 인증", metric: "시니어 알림 연동 복용 인증", points: "100P/회", message: "습관 보상" },
 ];
 
-const segments = [
+const revenueStreams = [
+  { id: 1, name: "구독 SaaS", share: "35%", desc: "B2C 월정액 19,900~29,900원 / B2B 관제 대시보드 5~20만원/월", icon: TrendingUp },
+  { id: 2, name: "디바이스 판매", share: "15%", desc: "플랫폼 진입 도구화. 렌탈 49,000 선납 + 월정액. 마진 최소화 → 모수 극대화", icon: Smartphone },
+  { id: 3, name: "광고 AD-Tech", share: "25%", desc: "생체 지표 기반 초정밀 타겟팅 광고. 제약사/보험사/병원/식품사 광고주 유치", icon: Megaphone },
+  { id: 4, name: "커머스 수수료", share: "12%", desc: "바이탈 몰 입점 브랜드 매출의 15~30% 수수료. 생체 데이터 기반 큐레이션", icon: ShoppingBag },
+  { id: 5, name: "데이터 B2B", share: "8%", desc: "비식별화 건강 데이터를 제약사/보험사/지자체에 분석 솔루션 형태로 제공", icon: Database },
+  { id: 6, name: "보험 손해율 분담", share: "3%", desc: "구독자 건강 개선 → 보험 청구 감소분의 일정 비율을 인센티브로 역분배", icon: Shield },
+  { id: 7, name: "팬덤/이벤트", share: "2%", desc: "임영웅 에디션 한정판, 팬 챌린지 우승 리워드, 아티스트 콜라보 굿즈 커머스", icon: Star },
+];
+
+const channels = [
   {
-    icon: Users,
-    title: "시니어 돌봄",
-    desc: "독거노인 24시간 모니터링, 고독사 제로",
-    stat: "대상 230만명",
-  },
-  {
-    icon: HardHat,
-    title: "산업 안전",
-    desc: "중대재해법 대응, 사전배치 통제 시스템",
-    stat: "300~500명 파일럿",
-  },
-  {
-    icon: Dumbbell,
-    title: "스포츠",
-    desc: "선수 수면/회복/컨디션 팀 단위 관리",
-    stat: "용인FC 도입",
-  },
-  {
+    id: "A",
     icon: Home,
-    title: "가족 케어",
-    desc: "자녀가 부모님 건강을 실시간 확인",
-    stat: "360° 패밀리 케어",
+    title: "시니어/효도 채널",
+    tagline: "부모님의 건강이 자녀의 안심이다",
+    services: ["효도 리워드 시스템: 자녀가 부모 구독료 결제 → 부모 건강 미션 달성 → 자녀 앱에 포인트 적립", "자녀 포인트 현금화 또는 상조 포인트 전환 → 구독 이탈 방지 동시 해결"],
+    partners: "보람상조, 우체국 보험, 지역 복지관, 요양원, 지자체 독거노인 사업",
+  },
+  {
+    id: "B",
+    icon: Star,
+    title: "트로트 팬덤 채널",
+    tagline: "팬심이 곧 건강이다",
+    services: ["임영웅 육성 모닝 건강 알림 + 팬클럽 단체 건강 챌린지", "콘서트장 CHA x 바이탈링 체험존: 심박수 측정 이벤트 + 현장 구매 즉시 굿즈 증정", "팬클럽 앰배서더 200~300명이 지역 영업팀이 되는 구조"],
+    partners: "향후 글로벌 K-pop 아이돌 확장",
+  },
+  {
+    id: "C",
+    icon: Dumbbell,
+    title: "액티브 직장인 채널",
+    tagline: "번아웃이 비용이다, 회복이 자산이다",
+    services: ["기업 HR 웰니스 구독", "스트레스 지수(HRV) 개선 시 DB손해보험 보험료 캐시백", "'번아웃 방지 챌린지': 월 스트레스 관리 달성 시 커피 쿠폰/교통비 리워드"],
+    partners: "DB손해보험, 대기업 복지몰, 기업 HR 솔루션사",
+  },
+  {
+    id: "D",
+    icon: Building2,
+    title: "지자체/B2G 채널",
+    tagline: "고독사 제로, 복지의 인프라",
+    services: ["지자체가 독거노인 1인당 29,900원/월 대납 → 전국 300만 독거노인 시장", "1~2시간 활동 없으면 담당자/자녀 자동 알림 → 방문 케어 빈도 50% 절감", "지자체 예산 논리: '방문 케어 공무원 1인 인건비'보다 훨씬 저렴한 디지털 안전망"],
+    partners: "광주서구, 제천시, 화성시 (검증 완료)",
   },
 ];
 
@@ -111,446 +95,185 @@ export default function PlatformPage() {
   return (
     <div className="min-h-screen pt-24 pb-16">
       {/* Hero */}
-      <section className="px-6 pb-20">
+      <section className="px-6 pb-16">
         <div className="mx-auto max-w-5xl text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
-          >
-            <span className="text-gradient">VITA</span> Platform
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <span className="text-gradient">VITA</span> Platform 설계
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-lg text-muted-foreground max-w-xl mx-auto"
-          >
-            AI 기반 24시간 365일 실시간 건강 모니터링 & 즉시 대응
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-lg text-muted-foreground max-w-xl mx-auto">
+            바이탈 캐시 + 7개 수익원 + 4대 채널
           </motion.p>
         </div>
       </section>
 
-      {/* Data Flow */}
-      <section className="px-6 pb-20">
+      {/* PART 3: 바이탈 캐시 */}
+      <section className="px-6 pb-16">
         <div className="mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap items-center justify-center gap-3"
-          >
-            {[
-              { icon: Activity, label: "Ring", sub: "생체 측정" },
-              { icon: Smartphone, label: "Phone", sub: "BLE 전송" },
-              { icon: Brain, label: "Cloud AI", sub: "실시간 분석" },
-              { icon: Bell, label: "Alert", sub: "이상 감지" },
-              { icon: Shield, label: "Action", sub: "즉시 대응" },
-            ].map((step, i) => (
-              <div key={step.label} className="flex items-center gap-3">
-                <div className="text-center">
-                  <div className="w-14 h-14 rounded-2xl gradient-vita flex items-center justify-center mx-auto mb-2">
-                    <step.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <p className="text-xs font-medium">{step.label}</p>
-                  <p className="text-[10px] text-muted-foreground">
-                    {step.sub}
-                  </p>
-                </div>
-                {i < 4 && (
-                  <ArrowRight className="w-4 h-4 text-muted-foreground shrink-0" />
-                )}
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+          <h2 className="text-sm font-medium text-accent mb-2 tracking-wide uppercase">PART 3. 바이탈 캐시 (Vital Cash)</h2>
+          <h3 className="text-2xl font-bold mb-2">플랫폼의 심장 설계</h3>
+          <p className="text-sm text-muted-foreground mb-8">
+            오우라도, 갤럭시도 제공한 적 없는 차별적 리워드 구조.
+            사용자는 링을 구매한 것이 아니라, &apos;매일 포인트를 생산할 수 있는 자산&apos;을 획득했다고 인식하게 됩니다.
+          </p>
 
-      {/* 3 Core Services — Tabs */}
-      <section className="px-6 pb-20 bg-muted/30">
-        <div className="mx-auto max-w-4xl py-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-8"
-          >
-            Core Services
-          </motion.h2>
+          {/* Earning Table */}
+          <Card className="p-5 mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Coins className="w-5 h-5 text-vita-gold" />
+              <h4 className="font-semibold">포인트 적립 체계 — &apos;자면서 돈을 번다&apos;</h4>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b text-xs text-muted-foreground">
+                    <th className="text-left py-2">건강 행동</th>
+                    <th className="text-left py-2">측정 지표</th>
+                    <th className="text-right py-2">지급 포인트</th>
+                    <th className="text-right py-2">메시지</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {earningTable.map((row) => (
+                    <tr key={row.action} className="border-b last:border-0">
+                      <td className="py-2 font-medium">{row.action}</td>
+                      <td className="py-2 text-muted-foreground text-xs">{row.metric}</td>
+                      <td className="py-2 text-right text-accent font-medium">{row.points}</td>
+                      <td className="py-2 text-right text-xs text-muted-foreground">{row.message}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
 
-          <Tabs defaultValue="health" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
-              <TabsTrigger value="health">건강 분석</TabsTrigger>
-              <TabsTrigger value="safety">안전 관제</TabsTrigger>
-              <TabsTrigger value="care">커넥티드 케어</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="health">
-              <Card className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">
-                      VITA Score (0-100)
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      수면, 스트레스, 심박, 활동량을 종합한 일일 건강 점수.
-                      개인별 기준선 대비 변화를 AI가 분석합니다.
-                    </p>
-                    <div className="space-y-3">
-                      {[
-                        { label: "수면 분석", score: 82 },
-                        { label: "스트레스 회복", score: 71 },
-                        { label: "심박 안정성", score: 90 },
-                        { label: "활동량", score: 65 },
-                      ].map((item) => (
-                        <div key={item.label}>
-                          <div className="flex justify-between text-xs mb-1">
-                            <span>{item.label}</span>
-                            <span className="font-medium">{item.score}점</span>
-                          </div>
-                          <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full gradient-vita rounded-full transition-all duration-1000"
-                              style={{ width: `${item.score}%` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      "HRV 기반 자율신경 균형도 분석",
-                      "부정맥 전조 증상 조기 감지",
-                      "개인 맞춤 AI 코칭 메시지",
-                      "7일/30일 트렌드 분석",
-                      "병원급 스트레스 정밀 보고서",
-                    ].map((feat) => (
-                      <div key={feat} className="flex gap-2 items-start">
-                        <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                        <span className="text-sm">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="safety">
-              <Card className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">
-                      실시간 이상감지 + 자동 대응
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      생체 이상 신호를 3단계로 감지하고, 골든타임 내 자동
-                      에스컬레이션합니다.
-                    </p>
-                    <div className="space-y-3">
-                      {[
-                        {
-                          trigger: "제스처 SOS",
-                          desc: "손가락 제스처로 즉각 구조 요청",
-                        },
-                        {
-                          trigger: "심박 급상승",
-                          desc: "과호흡, 쇼크 등 위험 상태 자동 감지",
-                        },
-                        {
-                          trigger: "SpO2 이상",
-                          desc: "산소 결핍 (밀폐공간, 지하시설) 포착",
-                        },
-                      ].map((item) => (
-                        <Card key={item.trigger} className="p-3 bg-destructive/5 border-destructive/20">
-                          <p className="text-sm font-medium">{item.trigger}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {item.desc}
-                          </p>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium mb-4">
-                      3단계 자동 대응
-                    </h4>
-                    <div className="space-y-4">
-                      {[
-                        {
-                          step: "1단계",
-                          action: "KakaoTalk 긴급 알림",
-                          desc: "보호자/관리자에게 위치 + 상태 즉시 전송",
-                          time: "즉시",
-                        },
-                        {
-                          step: "2단계",
-                          action: "보호자 AI 콜",
-                          desc: "미응답 시 등록된 보호자에게 음성 자동 발신",
-                          time: "5분",
-                        },
-                        {
-                          step: "3단계",
-                          action: "119 자동 호출",
-                          desc: "위험 기준 도달 시 자동 신고 + 위치 전송",
-                          time: "15분",
-                        },
-                      ].map((item) => (
-                        <div key={item.step} className="flex gap-3">
-                          <Badge
-                            variant={
-                              item.step === "3단계" ? "destructive" : "secondary"
-                            }
-                            className="shrink-0 mt-0.5"
-                          >
-                            {item.step}
-                          </Badge>
-                          <div>
-                            <p className="text-sm font-medium">{item.action}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="care">
-              <Card className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">
-                      보호자 중심 설계
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      고령자는 앱을 다루지 않습니다. 자녀가 부모를 보살피는
-                      보호자 중심 관제 모델입니다.
-                    </p>
-                    <div className="space-y-3">
-                      {[
-                        {
-                          icon: Smartphone,
-                          label: "보호자 앱",
-                          desc: "부모 심박/수면/위치를 자녀 스마트폰에서 실시간 확인",
-                        },
-                        {
-                          icon: Monitor,
-                          label: "기관 대시보드",
-                          desc: "수백 명을 동시 관제. 이상 징후 자동 에스컬레이션",
-                        },
-                        {
-                          icon: Phone,
-                          label: "KakaoTalk 연동",
-                          desc: "별도 앱 설치 없이 카카오톡으로 SOS/건강 리포트 수신",
-                        },
-                      ].map((item) => (
-                        <div key={item.label} className="flex gap-3">
-                          <item.icon className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                          <div>
-                            <p className="text-sm font-medium">{item.label}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium mb-4">파트너 연계</h4>
-                    <div className="space-y-3">
-                      {[
-                        {
-                          icon: Stethoscope,
-                          label: "차헬스케어 원격진료",
-                          desc: "이상 감지 시 24시간 내 전문의 상담 연결",
-                        },
-                        {
-                          icon: Shield,
-                          label: "보험사 건강점수 연동",
-                          desc: "VITA Score 기반 보험료 할인 + 건강 리워드",
-                        },
-                        {
-                          icon: Building2,
-                          label: "지자체 통합돌봄",
-                          desc: "226개 시군구 돌봄통합지원법 연계 관제",
-                        },
-                      ].map((item) => (
-                        <Card key={item.label} className="p-3">
-                          <div className="flex gap-2">
-                            <item.icon className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                            <div>
-                              <p className="text-xs font-medium">
-                                {item.label}
-                              </p>
-                              <p className="text-[10px] text-muted-foreground">
-                                {item.desc}
-                              </p>
-                            </div>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Membership Tiers */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-4xl">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-2"
-          >
-            VITA CARE Membership
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm text-muted-foreground mb-8"
-          >
-            기기 별도 구매 + 월 구독
-          </motion.p>
-
+          {/* Burning */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {tiers.map((tier, i) => (
-              <motion.div
-                key={tier.name}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="relative pt-2"
-              >
-                <Card
-                  className={`p-6 h-full flex flex-col overflow-visible ${
-                    tier.highlight
-                      ? "border-accent shadow-lg relative"
-                      : ""
-                  }`}
-                >
-                  {tier.highlight && (
-                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 gradient-vita text-white border-0 z-10">
-                      추천
-                    </Badge>
-                  )}
-                  <div className="mb-4">
-                    <h3 className="font-semibold">{tier.name}</h3>
-                    <p className="text-xs text-muted-foreground">
-                      {tier.target}
-                    </p>
-                  </div>
-                  <div className="mb-6">
-                    <span className="text-3xl font-bold">
-                      {tier.price}
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      원/월
-                    </span>
-                  </div>
-                  <div className="space-y-2.5 flex-1">
-                    {tier.features.map((feat) => (
-                      <div key={feat} className="flex gap-2 items-start">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                        <span className="text-sm">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+            <Card className="p-5 bg-accent/5 border-accent/20">
+              <Gift className="w-5 h-5 text-accent mb-2" />
+              <h4 className="text-sm font-semibold mb-1">구독료 차감</h4>
+              <p className="text-xs text-muted-foreground">적립 포인트로 월 구독료 직접 결제 가능. 성실히 수행하면 &apos;무료 건강 관리 서비스&apos;라는 인식 형성.</p>
+            </Card>
+            <Card className="p-5">
+              <ShoppingBag className="w-5 h-5 text-vita-gold mb-2" />
+              <h4 className="text-sm font-semibold mb-1">바이탈 몰 (Vital Mall)</h4>
+              <p className="text-xs text-muted-foreground">CHA 건강검진 할인권 / 건강기능식품/영양제 / 시니어 프리미엄 여행 / 트로트 아티스트 한정 굿즈</p>
+            </Card>
+            <Card className="p-5">
+              <Shield className="w-5 h-5 text-muted-foreground mb-2" />
+              <h4 className="text-sm font-semibold mb-1">외부 파트너 혜택</h4>
+              <p className="text-xs text-muted-foreground">보람상조 납입금 할인 / DB손해보험 보험료 캐시백 / 지역 약국 우선 배송 쿠폰</p>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Target Segments */}
-      <section className="px-6 pb-20 bg-muted/30">
-        <div className="mx-auto max-w-4xl py-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-8"
-          >
-            Target Segments
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {segments.map((seg, i) => (
-              <motion.div
-                key={seg.title}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 hover:shadow-md transition-shadow">
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-lg gradient-vita flex items-center justify-center shrink-0">
-                      <seg.icon className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-sm">{seg.title}</h3>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {seg.desc}
-                      </p>
-                      <Badge variant="secondary" className="mt-2 text-[10px]">
-                        {seg.stat}
+      {/* PART 4: 7개 수익원 */}
+      <section className="px-6 pb-16 bg-muted/30">
+        <div className="mx-auto max-w-4xl py-12">
+          <h2 className="text-sm font-medium text-accent mb-2 tracking-wide uppercase">PART 4. 수익 파이프라인</h2>
+          <h3 className="text-2xl font-bold mb-2">7개 수도꼭지 구조</h3>
+          <p className="text-sm text-muted-foreground mb-8">
+            하나의 수익원이 막혀도 나머지 6개가 흐르는 구조. 이것이 플랫폼 사업이 하드웨어 사업보다 근본적으로 강한 이유입니다.
+          </p>
+
+          <div className="space-y-3">
+            {revenueStreams.map((stream, i) => (
+              <motion.div key={stream.id} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <Card className="p-4">
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center gap-2 shrink-0 w-24">
+                      <Badge variant="secondary" className="text-[10px]">
+                        {stream.share}
                       </Badge>
                     </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <stream.icon className="w-4 h-4 text-accent" />
+                        <span className="text-sm font-semibold">{stream.name}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{stream.desc}</p>
+                    </div>
                   </div>
                 </Card>
               </motion.div>
             ))}
           </div>
+
+          <p className="text-[10px] text-muted-foreground mt-4 text-center">
+            * 성숙기(3년 이후) 기준 매출 비중 추산. 초기에는 구독+디바이스 중심으로 시작하여 광고/커머스/데이터 비중이 점진 확대.
+          </p>
+
+          {/* AD-Tech Highlight */}
+          <Card className="p-6 mt-6 bg-accent/5 border-accent/20">
+            <h4 className="text-sm font-semibold mb-3">광고 파이프라인 — 왜 구글/유튜브보다 강한가</h4>
+            <p className="text-xs text-muted-foreground mb-3">
+              구글/유튜브는 &apos;관심사&apos;를 기반으로 광고합니다. 그러나 바이탈링은 &apos;실제 생체 상태&apos;를 기반으로 광고합니다.
+              이것은 업계에 존재하지 않던 새로운 카테고리의 광고 상품입니다.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b text-muted-foreground">
+                    <th className="text-left py-1.5">감지 생체 지표</th>
+                    <th className="text-left py-1.5">타겟 광고 상품</th>
+                    <th className="text-left py-1.5">광고주</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["수면 무호흡 징후 감지", "수면 클리닉 정밀검진 패키지", "대학병원/CHA 건강검진센터"],
+                    ["HRV 낮음 (고스트레스)", "스트레스 완화 영양제/홍삼/L-테아닌", "한미/종근당/GNM자연의품격"],
+                    ["심박수 이상 패턴", "심장내과 조기 검진 패키지", "삼성서울/서울아산/CHA병원"],
+                    ["활동량 우수 (액티브 시니어)", "프리미엄 시니어 여행 상품", "한국관광공사/시니어 전문 여행사"],
+                    ["수면 질 3일 연속 저하", "고보습 야간 스킨케어 제품 큐레이션", "자사 화장품 브랜드 (첫 번째 입점 모델)"],
+                    ["고령/독거 감지", "상조 서비스/역모기지/유언 법률 서비스", "보람상조/현대라이프/법무법인"],
+                  ].map(([bio, ad, advertiser], i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-1.5">{bio}</td>
+                      <td className="py-1.5">{ad}</td>
+                      <td className="py-1.5 text-muted-foreground">{advertiser}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
         </div>
       </section>
 
-      {/* Validation */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-4xl pt-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-8 text-center"
-          >
-            Validated & Proven
-          </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { value: "5", label: "상급종합병원 IRB" },
-              { value: "6+", label: "지자체 시범사업" },
-              { value: "9,385+", label: "사용자" },
-              { value: "74M+", label: "건강 데이터" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 text-center">
-                  <p className="text-3xl font-bold text-gradient">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {stat.label}
-                  </p>
+      {/* PART 5: 4대 채널 */}
+      <section className="px-6 pb-16">
+        <div className="mx-auto max-w-4xl pt-12">
+          <h2 className="text-sm font-medium text-accent mb-2 tracking-wide uppercase">PART 5. B2C 채널별 타겟 전략</h2>
+          <h3 className="text-2xl font-bold mb-8">4대 채널 동시 공략</h3>
+
+          <div className="space-y-6">
+            {channels.map((ch, i) => (
+              <motion.div key={ch.id} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <Card className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg gradient-vita flex items-center justify-center shrink-0">
+                      <ch.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Badge variant="secondary" className="text-[10px]">채널 {ch.id}</Badge>
+                        <h4 className="font-semibold text-sm">{ch.title}</h4>
+                      </div>
+                      <p className="text-xs text-accent font-medium mb-3">&apos;{ch.tagline}&apos;</p>
+                      <div className="space-y-1.5 mb-3">
+                        {ch.services.map((svc, j) => (
+                          <div key={j} className="flex gap-2 items-start">
+                            <CheckCircle2 className="w-3 h-3 text-accent shrink-0 mt-0.5" />
+                            <span className="text-xs text-muted-foreground">{svc}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-[10px] text-muted-foreground">
+                        <span className="font-medium">연계 파트너:</span> {ch.partners}
+                      </p>
+                    </div>
+                  </div>
                 </Card>
               </motion.div>
             ))}
@@ -562,25 +285,18 @@ export default function PlatformPage() {
       <section className="px-6 pb-16">
         <div className="mx-auto max-w-4xl">
           <Card className="gradient-navy p-10 text-center text-white">
-            <h2 className="text-2xl font-bold mb-3">직접 확인하세요</h2>
+            <h2 className="text-xl font-bold mb-2">총판 Win-Win 구조 + 3년 로드맵</h2>
             <p className="text-sm text-white/70 mb-6">
-              실제 운영 중인 대시보드 데모를 체험해 보세요
+              총판 수수료 구조, 디바이스 확장 로드맵, 기업가치 시뮬레이션
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <LinkButton
-                  href="/demo/dashboard"
-                  size="lg"
-                className="bg-white text-slate-900 hover:bg-white/90">
-                  라이브 데모
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </LinkButton>
-              <LinkButton
-                  href="/business-plan"
-                  variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/10">
-                  사업계획서
-                </LinkButton>
+              <LinkButton href="/business-plan" size="lg" className="bg-white text-slate-900 hover:bg-white/90">
+                사업계획서
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </LinkButton>
+              <LinkButton href="/demo/dashboard" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
+                데모 보기
+              </LinkButton>
             </div>
           </Card>
         </div>

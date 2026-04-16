@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Activity,
@@ -9,14 +8,15 @@ import {
   BarChart3,
   Users,
   Database,
-  Clock,
+  Layers,
   ArrowRight,
   Shield,
   Heart,
   Zap,
+  Smartphone,
+  Target,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/link-button";
 
 const fadeUp = {
@@ -33,24 +33,25 @@ const fadeUp = {
 };
 
 const stats = [
-  { icon: Users, value: "9,385+", label: "Active Users" },
-  { icon: Database, value: "74M+", label: "Health Records" },
-  { icon: Clock, value: "24/7", label: "Real-time Monitoring" },
+  { icon: Target, value: "5,000억+", label: "플랫폼 전환 3년 후 기업 가치" },
+  { icon: Users, value: "100,000명", label: "3년 목표 누적 구독자" },
+  { icon: Database, value: "300억+", label: "3년 누적 플랫폼 매출" },
+  { icon: Layers, value: "7개", label: "수익 파이프라인 동시 가동" },
 ];
 
 const navCards = [
   {
     href: "/proposal",
     icon: FileText,
-    title: "본사 협업 제안서",
-    desc: "API 연동 + 플랫폼 독점 운영권 제안",
+    title: "플랫폼 전환 제안서",
+    desc: "App-First, Ring-Second 전략",
     color: "from-[#0d9488] to-[#2563eb]",
   },
   {
     href: "/platform",
-    icon: Shield,
-    title: "플랫폼 소개",
-    desc: "VITA CARE 서비스 + 멤버십 구조",
+    icon: Smartphone,
+    title: "플랫폼 설계",
+    desc: "바이탈 캐시 + 7개 수익원 + 4대 채널",
     color: "from-[#1e293b] to-[#334155]",
   },
   {
@@ -64,7 +65,7 @@ const navCards = [
     href: "/business-plan",
     icon: BarChart3,
     title: "사업계획서",
-    desc: "수익 모델 + 3개년 재무 전망",
+    desc: "3단계 로드맵 + 기업가치 시뮬레이션",
     color: "from-[#d97706] to-[#ca8a04]",
   },
 ];
@@ -81,17 +82,21 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 text-accent text-sm font-medium mb-8"
           >
             <Activity className="w-4 h-4" />
-            Powered by VitalRing AI
+            App-First, Ring-Second
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
+            className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight"
           >
-            <span className="text-gradient">VITA</span>
-            <span className="text-foreground"> Platform</span>
+            반지를 파는 회사에서
+            <br />
+            <span className="text-gradient">
+              생체 에너지를 자산화하는 플랫폼
+            </span>
+            으로
           </motion.h1>
 
           <motion.p
@@ -100,35 +105,37 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            바이탈링 생체 데이터가 만드는
+            독점계약 총판 사업자 대상
             <br />
             <span className="text-foreground font-medium">
-              커넥티드 케어 생태계
+              사업구조 전환 제안
             </span>
           </motion.p>
 
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-6 mb-12"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
           >
             {stats.map((stat) => (
               <Card
                 key={stat.label}
-                className="glass px-8 py-5 flex items-center gap-4"
+                className="glass px-4 py-5 flex flex-col items-center gap-2 text-center"
               >
                 <stat.icon className="w-5 h-5 text-accent" />
-                <div className="text-left">
-                  <p className="text-2xl font-bold text-foreground">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{stat.label}</p>
-                </div>
+                <p className="text-xl md:text-2xl font-bold text-foreground">
+                  {stat.value}
+                </p>
+                <p className="text-[10px] md:text-xs text-muted-foreground">
+                  {stat.label}
+                </p>
               </Card>
             ))}
           </motion.div>
 
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,23 +143,26 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-4"
           >
             <LinkButton
-                  href="/proposal"
-                  size="lg"
-              className="gradient-vita text-white border-0 px-8 h-12 text-base">
-                  본사 제안서
-                <ArrowRight className="w-4 h-4 ml-2" />
-                </LinkButton>
-            <LinkButton
-                  href="/platform"
-                  variant="outline"
+              href="/proposal"
               size="lg"
-              className="px-8 h-12 text-base">
-                  플랫폼 소개
-                </LinkButton>
+              className="gradient-vita text-white border-0 px-8 h-12 text-base"
+            >
+              전환 제안서 보기
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </LinkButton>
+            <LinkButton
+              href="/platform"
+              variant="outline"
+              size="lg"
+              className="px-8 h-12 text-base"
+            >
+              플랫폼 설계
+            </LinkButton>
           </motion.div>
         </div>
       </section>
 
+      {/* Core Message */}
       <section className="py-16 px-6">
         <div className="mx-auto max-w-5xl">
           <motion.div
@@ -164,18 +174,18 @@ export default function Home() {
             {[
               {
                 icon: Heart,
-                title: "건강의 조기 경보",
-                desc: "개인에게는 AI가 분석한 건강 점수와 이상 징후를 실시간 알림",
+                title: "기기 판매는 '점'의 비즈니스",
+                desc: "데이터 구독이라는 '면'의 비즈니스로 전환합니다. 반지는 입성하기 위한 티켓일 뿐.",
               },
               {
                 icon: Shield,
-                title: "가족의 안심",
-                desc: "보호자에게는 부모님 건강 상태를 언제 어디서나 확인하는 앱",
+                title: "건강해지면 우리가 돈을 준다",
+                desc: "바이탈 캐시로 건강 행동에 보상. 포인트를 잃기 싫어서 앱을 끄지 못하는 심리적 락인.",
               },
               {
                 icon: Zap,
-                title: "돌봄의 연결망",
-                desc: "사회에는 의료-보험-지자체를 잇는 데이터 기반 케어 인프라",
+                title: "7개 수도꼭지 동시 가동",
+                desc: "하나가 막혀도 나머지 6개가 흐르는 구조. 하드웨어 사업보다 근본적으로 강한 이유.",
               },
             ].map((item, i) => (
               <motion.div
@@ -201,7 +211,33 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-muted/50">
+      {/* The Question */}
+      <section className="py-16 px-6 bg-muted/30">
+        <div className="mx-auto max-w-3xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Card className="p-8 md:p-12 gradient-navy text-white border-0">
+              <p className="text-lg md:text-xl font-medium leading-relaxed mb-6">
+                애플은 아이폰을 파는 회사인가,
+                <br />
+                앱스토어를 운영하는 회사인가?
+              </p>
+              <p className="text-sm text-white/70 leading-relaxed">
+                애플의 하드웨어 마진은 약 40%. 그러나 앱스토어/구독 서비스의
+                영업이익률은 70%를 넘습니다.
+                <br />
+                바이탈링도 지금 이 선택의 기로에 있습니다.
+              </p>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Navigation Cards */}
+      <section className="py-16 px-6">
         <div className="mx-auto max-w-5xl">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -221,7 +257,7 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                <Link href={card.href}>
+                <a href={card.href}>
                   <Card className="group p-6 border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden relative">
                     <div
                       className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${card.color}`}
@@ -243,7 +279,7 @@ export default function Home() {
                       <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-all ml-auto mt-1 group-hover:translate-x-1" />
                     </div>
                   </Card>
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>

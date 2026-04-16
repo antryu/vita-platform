@@ -1,30 +1,26 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Server,
-  Key,
-  Gift,
   TrendingUp,
-  Users,
-  Clock,
-  CheckCircle2,
-  Activity,
+  AlertTriangle,
+  Shield,
   Smartphone,
-  Brain,
-  CreditCard,
-  LayoutDashboard,
-  Bell,
-  Hospital,
-  ShieldCheck,
+  Database,
+  Award,
   Building2,
+  Stethoscope,
+  Clock,
+  Target,
+  CheckCircle2,
+  BarChart3,
+  Zap,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { LinkButton } from "@/components/link-button";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { LinkButton } from "@/components/link-button";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -35,359 +31,193 @@ const fadeUp = {
   }),
 };
 
-const timeline = [
-  { week: "1-2주", title: "데이터 파이프라인", desc: "VitalRing API 연동 + 데이터 수집/저장" },
-  { week: "3-4주", title: "AI 엔진", desc: "VITA Score + 이상감지 + AI 코칭" },
-  { week: "5-6주", title: "서비스 레이어", desc: "보호자 앱 + 기관 대시보드 + 결제" },
-  { week: "7-8주", title: "통합 & 연동", desc: "KakaoTalk + 파트너 API + 보안 점검" },
-  { week: "9-10주", title: "파일럿 준비", desc: "500명 온보딩 + 운영 매뉴얼 + 데모" },
-];
-
-const techStack = [
-  { name: "Next.js", desc: "프론트엔드" },
-  { name: "Supabase", desc: "DB + Auth" },
-  { name: "AI LLM", desc: "건강 분석 엔진" },
-  { name: "KakaoTalk", desc: "알림 연동" },
-  { name: "Toss Pay", desc: "구독 결제" },
-  { name: "Tailscale", desc: "보안 네트워크" },
-];
-
 export default function ProposalPage() {
   return (
     <div className="min-h-screen pt-24 pb-16">
       {/* Header */}
       <section className="px-6 pb-16">
         <div className="mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-4"
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
             <Badge variant="outline" className="text-accent border-accent/30">
-              ZTAcom 협업 제안
+              사업구조 전환 제안서
             </Badge>
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4"
-          >
-            VITA Platform
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
+            반지를 파는 회사에서
             <br />
-            <span className="text-gradient">협업 제안서</span>
+            <span className="text-gradient">생체 에너지를 자산화하는 플랫폼</span>으로
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-muted-foreground max-w-xl"
-          >
-            바이탈링 API 위에 구축하는 데이터 플랫폼.
-            <br />
-            제안서가 아니라 실제 프로덕트로 말합니다.
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground">
+            App-First, Ring-Second — 웨어러블 헬스 플랫폼 전환 전략
           </motion.p>
         </div>
       </section>
 
-      {/* Problem */}
-      <section className="px-6 pb-20">
+      {/* The Question */}
+      <section className="px-6 pb-16">
         <div className="mx-auto max-w-4xl">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium text-accent mb-6 tracking-wide uppercase"
-          >
-            Problem
+          <Card className="p-8 md:p-10 gradient-navy text-white border-0">
+            <h2 className="text-lg font-bold mb-4">이 제안서를 읽기 전에 — 단 하나의 질문</h2>
+            <p className="text-base leading-relaxed mb-4">
+              애플은 아이폰을 파는 회사인가, 앱스토어를 운영하는 회사인가?
+            </p>
+            <p className="text-sm text-white/70 leading-relaxed mb-4">
+              애플의 하드웨어 마진은 약 40%. 그러나 앱스토어/구독 서비스의 영업이익률은 70%를 넘습니다.
+              나이키는 신발을 파는 회사입니다. 하지만 Nike Run Club 앱에는 5,000만 명이 활동하며, 이 앱이 신발을 팝니다.
+            </p>
+            <Separator className="bg-white/20 my-4" />
+            <p className="text-sm font-medium text-vita-gold">
+              바이탈링도 지금 이 선택의 기로에 있습니다.
+              <br />
+              &quot;반지를 파는 회사&quot;로 남을 것인가, &quot;대한민국 시니어의 생체 시간을 관리하는 플랫폼&quot;이 될 것인가.
+            </p>
+          </Card>
+        </div>
+      </section>
+
+      {/* PART 1: 현황 진단 */}
+      <section className="px-6 pb-16">
+        <div className="mx-auto max-w-4xl">
+          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-sm font-medium text-accent mb-2 tracking-wide uppercase">
+            PART 1. 현황 진단
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <motion.h3 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl font-bold mb-8">
+            하드웨어 사업의 구조적 3대 한계
+          </motion.h3>
+          <div className="space-y-4">
             {[
               {
-                title: "제안서만 있고 플랫폼은 없다",
-                desc: "보람상조, 차HC, 지자체 대상 제안서는 완성. 하지만 실제 구독/과금/운영 시스템이 부재.",
+                icon: AlertTriangle,
+                title: "경쟁의 천장",
+                problem: "오우라/삼성/갤럭시링/RingConn과 스펙 경쟁",
+                why: "스펙 경쟁 = 자본력의 싸움. 삼성의 연 R&D 예산은 30조 원. 우리가 이길 수 없는 전장입니다.",
               },
               {
-                title: "구독 수익 모델이 없다",
-                desc: "기기 판매 일회성 매출 의존. 하드웨어 마진 42%만으로는 플랫폼 밸류에이션 불가.",
+                icon: TrendingUp,
+                title: "마진의 천장",
+                problem: "디바이스 1대 공헌이익 약 98,000원으로 상한 고정",
+                why: "아무리 많이 팔아도 '몇 대를 팔았나'가 성장의 전부. 영업 속도에 물리적 한계.",
               },
               {
-                title: "파트너 연계 시스템이 없다",
-                desc: "의료(차HC), 보험(DB손보), 응급(119) 연계는 구상 단계. API 허브 부재.",
+                icon: BarChart3,
+                title: "가치의 천장",
+                problem: "하드웨어 제조사 PER 멀티플 10~15배 적용",
+                why: "연 매출 50억이어도 기업 가치 500~750억 상한. 플랫폼 기업이면 동일 매출에 50배 = 2,500억.",
               },
             ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 h-full border-destructive/20 bg-destructive/5">
-                  <h3 className="font-semibold text-sm mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.desc}
-                  </p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Architecture */}
-      <section className="px-6 pb-20 bg-muted/30">
-        <div className="mx-auto max-w-4xl py-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium text-accent mb-2 tracking-wide uppercase"
-          >
-            Solution
-          </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-10"
-          >
-            우리가 구축하는 것
-          </motion.h3>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            {/* Flow Diagram */}
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-3 items-center">
-              <Card className="p-4 text-center border-2 border-muted">
-                <Activity className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
-                <p className="text-xs font-medium">VitalRing</p>
-                <p className="text-[10px] text-muted-foreground">생체 데이터</p>
-              </Card>
-              <div className="hidden md:flex justify-center">
-                <ArrowRight className="w-5 h-5 text-muted-foreground" />
-              </div>
-
-              <Card className="p-4 text-center border-2 border-accent gradient-vita text-white">
-                <div className="space-y-1.5">
-                  <p className="text-xs font-bold">VITA Platform</p>
-                  <div className="grid grid-cols-2 gap-1">
-                    {[
-                      { icon: Brain, label: "AI 엔진" },
-                      { icon: CreditCard, label: "과금" },
-                      { icon: LayoutDashboard, label: "대시보드" },
-                      { icon: Bell, label: "알림" },
-                    ].map((item) => (
-                      <div
-                        key={item.label}
-                        className="flex items-center gap-1 text-[9px] bg-white/20 rounded px-1.5 py-0.5"
-                      >
-                        <item.icon className="w-2.5 h-2.5" />
-                        {item.label}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-
-              <div className="hidden md:flex justify-center">
-                <ArrowRight className="w-5 h-5 text-muted-foreground" />
-              </div>
-
-              <div className="space-y-2">
-                {[
-                  { icon: Hospital, label: "의료 (차HC)" },
-                  { icon: ShieldCheck, label: "보험 (DB손보)" },
-                  { icon: Building2, label: "지자체 (226개)" },
-                ].map((item) => (
-                  <Card
-                    key={item.label}
-                    className="p-2 flex items-center gap-2"
-                  >
-                    <item.icon className="w-3.5 h-3.5 text-accent" />
-                    <p className="text-[10px] font-medium">{item.label}</p>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* The Deal */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-4xl pt-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* What we need */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-sm font-medium text-accent mb-4 tracking-wide uppercase">
-                ZTAcom에 요청
-              </h3>
-              <div className="space-y-4">
-                <Card className="p-5 border-accent/20">
-                  <div className="flex gap-3">
-                    <Key className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+              <motion.div key={item.title} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <Card className="p-6">
+                  <div className="flex gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center shrink-0">
+                      <item.icon className="w-5 h-5 text-destructive" />
+                    </div>
                     <div>
-                      <p className="font-semibold text-sm">Full API 접근권</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        실시간 바이탈 데이터 수신 Webhook + 사용자 관리 API +
-                        기기 상태 API
-                      </p>
+                      <h4 className="font-semibold mb-1">{item.title}</h4>
+                      <p className="text-sm text-foreground mb-1">{item.problem}</p>
+                      <p className="text-xs text-muted-foreground">{item.why}</p>
                     </div>
                   </div>
                 </Card>
-                <Card className="p-5 border-accent/20">
-                  <div className="flex gap-3">
-                    <Server className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-sm">
-                        플랫폼 독점 운영권
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        구독 과금, 의료 연계, 보험 JV, 데이터 라이선스 사업의
-                        독점 운영
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* What ZTAcom gets */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-sm font-medium text-vita-gold mb-4 tracking-wide uppercase">
-                ZTAcom이 얻는 것
-              </h3>
-              <div className="space-y-4">
+      {/* 우리가 이미 가진 것 */}
+      <section className="px-6 pb-16 bg-muted/30">
+        <div className="mx-auto max-w-4xl py-12">
+          <h3 className="text-xl font-bold mb-6">우리가 이미 가진 것 — 지금 당장 쓸 수 있는 무기들</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {[
+              { asset: "누적 생체 데이터", detail: "실사용자 10,135명 / 8,500만 건 이상의 24시간 생체 데이터" },
+              { asset: "임상 레퍼런스", detail: "서울대병원/세브란스 IRB 임상 완료, 심박 ±2bpm 정확도" },
+              { asset: "지자체 실증", detail: "광주서구/제천시/화성시 현장 검증 — 고독사 예방 실효성 입증" },
+              { asset: "CHA 헬스케어", detail: "차병원그룹 협업 채널 — 의료 신뢰도 담보" },
+              { asset: "경쟁 공백 기간", detail: "오우라 ITC 특허 소송으로 RingConn/삼성 갤럭시링 출시 지연 — 골든 타임" },
+              { asset: "총판 네트워크", detail: "전국 독점계약 총판 파트너 — 플랫폼 보급의 가장 강력한 오프라인 지상군" },
+            ].map((item) => (
+              <Card key={item.asset} className="p-4">
+                <p className="text-sm font-semibold mb-1">{item.asset}</p>
+                <p className="text-xs text-muted-foreground">{item.detail}</p>
+              </Card>
+            ))}
+          </div>
+          <p className="text-sm text-accent font-medium mt-6 text-center">
+            결론: 우리는 이미 총을 가지고 있습니다. 지금 필요한 것은 총알이 아니라 더 좋은 전장(플랫폼)입니다.
+          </p>
+        </div>
+      </section>
+
+      {/* PART 2: 핵심 전략 */}
+      <section className="px-6 pb-16">
+        <div className="mx-auto max-w-4xl pt-12">
+          <h2 className="text-sm font-medium text-accent mb-2 tracking-wide uppercase">PART 2. 핵심 전략</h2>
+          <h3 className="text-2xl font-bold mb-8">App-First, Ring-Second</h3>
+
+          {/* Before/After */}
+          <div className="overflow-x-auto mb-10">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-3 font-medium text-xs text-muted-foreground w-1/3">기존 정의</th>
+                  <th className="text-left py-3 font-medium text-xs text-accent w-2/3">새로운 정의</th>
+                </tr>
+              </thead>
+              <tbody>
                 {[
-                  {
-                    icon: Gift,
-                    title: "1~2억 상당 플랫폼 무상 구축",
-                    desc: "외주 개발비 제로. 자체 기술력으로 8주 내 MVP 완성.",
-                  },
-                  {
-                    icon: TrendingUp,
-                    title: "구독 매출 로열티 (별도 협의)",
-                    desc: "기기 판매 이후에도 지속적인 반복 수익(MRR) 확보.",
-                  },
-                  {
-                    icon: Users,
-                    title: "기기 판매 채널 확대",
-                    desc: "보람상조 360만, 지자체 226개, 기업 B2B 채널 확보.",
-                  },
-                ].map((item, i) => (
-                  <Card key={item.title} className="p-5">
-                    <div className="flex gap-3">
-                      <item.icon className="w-5 h-5 text-vita-gold shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-sm">{item.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
+                  ["정밀 생체 측정 스마트링 제조/판매", "생체 에너지를 자산화하는 헬스 데이터 플랫폼"],
+                  ["반지가 주인공", "앱이 주인공, 반지는 측정 도구"],
+                  ["판매가 끝이다", "판매는 시작이다"],
+                  ["고객이 우리에게 돈을 낸다", "고객이 건강해지면 우리가 돈을 준다"],
+                  ["하드웨어 마진 40% 상한", "플랫폼/데이터 마진 70%+ 무상한"],
+                  ["기업 가치 배수 10~15x", "기업 가치 배수 50~100x"],
+                ].map(([before, after], i) => (
+                  <tr key={i} className="border-b last:border-0">
+                    <td className="py-3 text-muted-foreground">{before}</td>
+                    <td className="py-3 font-medium text-accent">{after}</td>
+                  </tr>
                 ))}
-              </div>
-            </motion.div>
+              </tbody>
+            </table>
           </div>
-        </div>
-      </section>
 
-      {/* Timeline */}
-      <section className="px-6 pb-20 bg-muted/30">
-        <div className="mx-auto max-w-4xl py-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium text-accent mb-2 tracking-wide uppercase"
-          >
-            Timeline
-          </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-10"
-          >
-            10주 MVP 로드맵
-          </motion.h3>
+          {/* 핵심 명제 */}
+          <Card className="p-6 bg-accent/5 border-accent/20 mb-10">
+            <p className="text-sm font-medium leading-relaxed">
+              &quot;반지는 고객의 손가락에 입성하기 위한 티켓일 뿐,
+              <br />
+              진짜 수익은 그들이 매일 사용하는 앱(플랫폼)에서 나온다.&quot;
+            </p>
+          </Card>
 
-          <div className="space-y-0">
-            {timeline.map((item, i) => (
-              <motion.div
-                key={item.week}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="flex gap-4 items-start"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full gradient-vita flex items-center justify-center text-white text-xs font-bold shrink-0">
-                    {i + 1}
-                  </div>
-                  {i < timeline.length - 1 && (
-                    <div className="w-px h-12 bg-border" />
-                  )}
-                </div>
-                <div className="pb-8">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Badge variant="secondary" className="text-xs">
-                      {item.week}
-                    </Badge>
-                    <span className="font-semibold text-sm">{item.title}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-4xl pt-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium text-accent mb-6 tracking-wide uppercase"
-          >
-            Tech Stack
-          </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {techStack.map((item, i) => (
-              <motion.div
-                key={item.name}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Card className="p-4 text-center hover:shadow-md transition-shadow">
-                  <p className="font-semibold text-sm">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">{item.desc}</p>
-                </Card>
-              </motion.div>
-            ))}
+          {/* 글로벌 벤치마크 */}
+          <h4 className="text-lg font-semibold mb-4">글로벌 맥락 — 이미 검증된 경로</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-2 text-xs text-muted-foreground">기업</th>
+                  <th className="text-left py-2 text-xs text-muted-foreground">전환</th>
+                  <th className="text-left py-2 text-xs text-muted-foreground">결과</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["애플", "아이폰 → 앱스토어/구독 서비스", "서비스 매출 비중 22%, 이익 기여 40%. 시총 3,000조 원."],
+                  ["나이키", "신발 → Nike Run Club 앱 5천만 명", "앱이 신발을 파는 구조. 디지털 사업부 영업이익률 40%+."],
+                  ["넷플릭스", "DVD 대여 → 구독 스트리밍 플랫폼", "동일한 콘텐츠를 '구독'으로 팔자 기업 가치 100배 증가."],
+                  ["오우라(Oura)", "링 → 구독 앱 플랫폼", "링 가격 인하 후 구독 $5.99/월 → 플랫폼 기업으로 재평가. 기업가치 $11B."],
+                  ["히로인즈", "운동 인증 앱 → 커뮤니티+데이터 플랫폼", "4060 여성 건강 데이터 독점으로 M&A/투자 유치 준비 중."],
+                ].map(([company, transition, result], i) => (
+                  <tr key={i} className="border-b last:border-0">
+                    <td className="py-2.5 font-medium">{company}</td>
+                    <td className="py-2.5 text-muted-foreground">{transition}</td>
+                    <td className="py-2.5 text-xs">{result}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -396,27 +226,18 @@ export default function ProposalPage() {
       <section className="px-6 pb-16">
         <div className="mx-auto max-w-4xl">
           <Card className="gradient-navy p-10 text-center text-white">
-            <h2 className="text-2xl font-bold mb-3">
-              파워포인트가 아니라 프로덕트로 말합니다
-            </h2>
+            <h2 className="text-xl font-bold mb-2">다음 단계: 플랫폼 설계</h2>
             <p className="text-sm text-white/70 mb-6">
-              실제 돌아가는 데모를 확인하세요
+              바이탈 캐시, 7개 수익원, 4대 채널 전략을 확인하세요
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <LinkButton
-                  href="/platform"
-                  size="lg"
-                className="bg-white text-slate-900 hover:bg-white/90">
-                  플랫폼 소개
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </LinkButton>
-              <LinkButton
-                  href="/demo/dashboard"
-                  variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/10">
-                  기술 데모 보기
-                </LinkButton>
+              <LinkButton href="/platform" size="lg" className="bg-white text-slate-900 hover:bg-white/90">
+                플랫폼 설계 보기
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </LinkButton>
+              <LinkButton href="/business-plan" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
+                사업계획서
+              </LinkButton>
             </div>
           </Card>
         </div>
