@@ -34,6 +34,9 @@ export function Nav() {
     localStorage.setItem("theme", next ? "dark" : "light");
   }
 
+  const isAppPage = pathname.startsWith("/app") || pathname.startsWith("/auth");
+  if (isAppPage) return null;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
