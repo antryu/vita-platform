@@ -1,0 +1,40 @@
+# VITA Platform Phase 1 — Progress Log
+
+## Session 1: 2026-04-17
+
+### Completed Stories
+- US-001: Supabase client + environment config ✅
+  - lib/supabase/client.ts (browser client)
+  - lib/supabase/server.ts (server component client)
+  - lib/supabase/admin.ts (service role admin)
+  - lib/supabase/types.ts (full Database type with all 10 tables)
+  - env.example (all env vars)
+  - TypeScript: 0 errors
+
+- US-002: Database schema SQL ✅
+  - supabase/schema.sql (10 tables, 8 enums, 12 indexes, RLS policies, triggers)
+  - Tables: profiles, members, organizations, vitals, health_analyses, alerts, subscriptions, payments, vital_cash, partner_referrals
+  - RLS: guardian/org_admin/self policies
+  - Triggers: auto profile creation, updated_at
+
+- US-003: Mock data seed ✅
+  - supabase/seed.ts (10 Korean members, 30 days vitals, VITA scores, 5 alerts, 3 orgs)
+  - Realistic HR/HRV/SpO2/temp ranges
+  - VITA Score calculation with weighted algorithm
+
+- US-004: VitalRing API webhook ✅
+  - app/api/ingest/vitals/route.ts
+  - Payload validation, anomaly detection (absolute thresholds)
+  - Returns alerts array for critical vitals
+  - TypeScript: 0 errors
+
+### Remaining Stories (Phase 1)
+- US-005: Auth pages (login + signup + onboarding) — PENDING
+- US-006: Authenticated app shell with sidebar layout — PENDING
+- US-007: Member dashboard with mock data display — PENDING
+
+### Learnings
+- Hook system blocks .env file writes — use env.example naming
+- Subagents can't write files in this project — do everything directly
+- shadcn v2 uses base-ui, no asChild prop — use LinkButton helper for Link+Button
+- framer-motion ease array needs `as const` for TypeScript

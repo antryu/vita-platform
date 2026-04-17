@@ -1,0 +1,111 @@
+{
+  "title": "VITA Platform Phase 1: Foundation",
+  "description": "Supabase DB + VitalRing API + Auth + Mock Data + Core UI Shell",
+  "stories": [
+    {
+      "id": "US-001",
+      "title": "Supabase client + environment config",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "lib/supabase/client.ts exports createClient() for browser use",
+        "lib/supabase/server.ts exports createServerClient() for server components",
+        "lib/supabase/admin.ts exports createAdminClient() with service role key",
+        ".env.local.example exists with NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY placeholders",
+        "TypeScript compiles with no errors (npx tsc --noEmit)"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Database schema SQL migration file",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "supabase/schema.sql exists with CREATE TABLE statements for: profiles, members, organizations, vitals, health_analyses, alerts, subscriptions, payments, vital_cash, partner_referrals",
+        "vitals table has index on (member_id, measured_at DESC)",
+        "RLS policies exist for: guardians see only linked members, org admins see only their org members",
+        "profiles table has role ENUM: member, guardian, org_admin, platform_admin",
+        "vital_cash table has transaction_type ENUM: earn, burn with reason field",
+        "SQL syntax is valid PostgreSQL"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "Mock data seed script",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "supabase/seed.ts exists and generates 10 mock members with Korean names and ages 65-85",
+        "Generates 30 days of vitals per member with realistic ranges (HR 55-90, HRV 15-60, SpO2 94-99, temp 35.5-37.2)",
+        "Generates pre-calculated VITA Scores (0-100) with risk_level classification",
+        "Generates 5 sample alerts (2 critical, 3 warning) with realistic messages",
+        "Generates 3 sample organizations (municipality, nursing home, enterprise)",
+        "Data is exportable as SQL INSERT statements or JSON"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "VitalRing API webhook receiver",
+      "priority": 4,
+      "passes": false,
+      "acceptanceCriteria": [
+        "app/api/ingest/vitals/route.ts handles POST requests",
+        "Validates required fields: ring_id, measured_at, heart_rate",
+        "Returns 400 for invalid payload with error message",
+        "Returns 200 with {status: 'ok', alerts: []} for valid payload",
+        "Stores validated data in vitals table format (even if Supabase not connected, structure is correct)",
+        "Includes deduplication check on (ring_id + measured_at)",
+        "TypeScript compiles with no errors"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "Auth pages (login + signup + onboarding)",
+      "priority": 5,
+      "passes": false,
+      "acceptanceCriteria": [
+        "app/auth/login/page.tsx renders email/password login form with Supabase Auth",
+        "app/auth/signup/page.tsx renders registration form with role selection (member/guardian/org_admin)",
+        "app/auth/callback/route.ts handles OAuth callback",
+        "Forms use shadcn/ui components with consistent VITA design system (teal/navy theme)",
+        "Error states are handled (invalid credentials, network error)",
+        "Responsive on mobile and desktop",
+        "Dark mode supported"
+      ]
+    },
+    {
+      "id": "US-006",
+      "title": "Authenticated app shell with sidebar layout",
+      "priority": 6,
+      "passes": false,
+      "acceptanceCriteria": [
+        "app/(app)/layout.tsx renders sidebar + main content area for authenticated users",
+        "Sidebar shows: Dashboard, Guardian, Vital Cash, Subscription, Settings menu items with lucide icons",
+        "Sidebar shows user name + role badge from profile",
+        "Sidebar collapses to icons on mobile (responsive)",
+        "Sidebar uses gradient-navy dark background matching VITA brand",
+        "app/(app)/dashboard/page.tsx renders placeholder member dashboard",
+        "Marketing pages (/, /proposal, /platform, etc.) remain separate from app layout",
+        "Middleware redirects unauthenticated users to /auth/login",
+        "Dark mode supported on all app shell elements"
+      ]
+    },
+    {
+      "id": "US-007",
+      "title": "Member dashboard with mock data display",
+      "priority": 7,
+      "passes": false,
+      "acceptanceCriteria": [
+        "app/(app)/dashboard/page.tsx displays VITA Score as circular progress (0-100)",
+        "Shows 4 vital cards: heart rate, SpO2, sleep duration, stress level",
+        "Shows AI coaching message card",
+        "Shows Vital Cash balance with recent earning history",
+        "Shows subscription status badge",
+        "Uses mock data (no real Supabase connection required for initial render)",
+        "Design matches premium healthcare aesthetic: glassmorphism cards, teal accents, smooth animations",
+        "Responsive mobile layout",
+        "Dark mode supported"
+      ]
+    }
+  ]
+}
